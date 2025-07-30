@@ -16,7 +16,7 @@
 #include "file.h"
 #include "fcntl.h"
 
-_Atomic uint64 readcount;
+static _Atomic uint64 readcount;
 
 // Fetch the nth word-sized system call argument as a file descriptor
 // and return both the descriptor and the corresponding struct file.
