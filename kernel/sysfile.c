@@ -4,6 +4,8 @@
 // user code, and calls into file.c and fs.c.
 //
 
+#include <stdatomic.h>
+
 #include "types.h"
 #include "riscv.h"
 #include "defs.h"
@@ -15,6 +17,8 @@
 #include "sleeplock.h"
 #include "file.h"
 #include "fcntl.h"
+
+atomic_int readcount;
 
 // Fetch the nth word-sized system call argument as a file descriptor
 // and return both the descriptor and the corresponding struct file.
@@ -72,7 +76,7 @@ sys_read(void)
   int n;
   uint64 p;
 
-  fileincrreadcount();
+  readcount++;
 
   argaddr(1, &p);
   argint(2, &n);
@@ -509,5 +513,5 @@ sys_pipe(void)
 int
 sys_getreadcount(void)
 {
-  return filegetreadcount();
+  return readcount;
 }

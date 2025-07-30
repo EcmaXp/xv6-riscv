@@ -2,8 +2,6 @@
 // Support functions for system calls that involve file descriptors.
 //
 
-#include <stdatomic.h>
-
 #include "types.h"
 #include "riscv.h"
 #include "defs.h"
@@ -20,10 +18,6 @@ struct {
   struct spinlock lock;
   struct file file[NFILE];
 } ftable;
-
-struct {
-  atomic_int readcount;
-} fcounter;
 
 void
 fileinit(void)
@@ -184,17 +178,4 @@ filewrite(struct file *f, uint64 addr, int n)
   }
 
   return ret;
-}
-
-void
-fileincrreadcount(void)
-{
-  fcounter.readcount++;
-}
-
-int
-filegetreadcount(void)
-{
-  int readcount = fcounter.readcount;
-  return readcount;
 }
