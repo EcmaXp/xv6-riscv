@@ -19,10 +19,16 @@ struct {
   struct file file[NFILE];
 } ftable;
 
+struct {
+  struct spinlock lock;
+  int readcount;
+} fcounter;
+
 void
 fileinit(void)
 {
   initlock(&ftable.lock, "ftable");
+  initlock(&fcounter.lock, "fcounter");
 }
 
 // Allocate a file structure.
@@ -180,3 +186,19 @@ filewrite(struct file *f, uint64 addr, int n)
   return ret;
 }
 
+void
+fileincrreadcount(void)
+{
+  acquire(&fcounter.lock);
+  fcounter.readcount++;
+  release(&fcounter.lock);
+}
+
+int
+filegetreadcount(void)
+{
+  acquire(&fcounter.lock);
+  int readcount = fcounter.readcount;
+  release(&fcounter.lock);
+  return readcount;
+}

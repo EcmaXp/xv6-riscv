@@ -72,6 +72,8 @@ sys_read(void)
   int n;
   uint64 p;
 
+  fileincrreadcount();
+
   argaddr(1, &p);
   argint(2, &n);
   if(argfd(0, 0, &f) < 0)
@@ -502,4 +504,10 @@ sys_pipe(void)
     return -1;
   }
   return 0;
+}
+
+int
+sys_getreadcount(void)
+{
+  return filegetreadcount();
 }
