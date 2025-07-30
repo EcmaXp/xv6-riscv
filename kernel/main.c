@@ -6,6 +6,15 @@
 
 volatile static int started = 0;
 
+// npx oh-my-logo "XV6" --filled
+static const char *logo =
+  " ██╗  ██╗ ██╗   ██╗  ██████╗  " "\n"
+  " ╚██╗██╔╝ ██║   ██║ ██╔════╝  " "\n"
+  "  ╚███╔╝  ██║   ██║ ███████╗  " "\n"
+  "  ██╔██╗  ╚██╗ ██╔╝ ██╔═══██╗ " "\n"
+  " ██╔╝ ██╗  ╚████╔╝  ╚██████╔╝ " "\n"
+  " ╚═╝  ╚═╝   ╚═══╝    ╚═════╝  ";
+
 // start() jumps here in supervisor mode on all CPUs.
 void
 main()
@@ -15,7 +24,7 @@ main()
     printfinit();
     printf("\n");
     printf("xv6 kernel is booting\n");
-    printf("\n");
+    printf("%s\n", logo);
     kinit();         // physical page allocator
     kvminit();       // create kernel page table
     kvminithart();   // turn on paging
