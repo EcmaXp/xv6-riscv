@@ -4,8 +4,6 @@
 // user code, and calls into file.c and fs.c.
 //
 
-#include <stdatomic.h>
-
 #include "types.h"
 #include "riscv.h"
 #include "defs.h"
@@ -18,7 +16,7 @@
 #include "file.h"
 #include "fcntl.h"
 
-atomic_uint readcount;
+_Atomic uint64 readcount;
 
 // Fetch the nth word-sized system call argument as a file descriptor
 // and return both the descriptor and the corresponding struct file.
@@ -510,7 +508,7 @@ sys_pipe(void)
   return 0;
 }
 
-uint
+uint64
 sys_getreadcount(void)
 {
   return readcount;
