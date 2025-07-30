@@ -134,7 +134,7 @@ main(int argc, char *argv[])
       shortname = argv[i] + 5;
     else
       shortname = argv[i];
-    
+
     assert(index(shortname, '/') == 0);
 
     if((fd = open(argv[i], 0)) < 0)
@@ -148,7 +148,7 @@ main(int argc, char *argv[])
       shortname += 1;
 
     assert(strlen(shortname) <= DIRSIZ);
-    
+
     inum = ialloc(T_FILE);
 
     bzero(&de, sizeof(de));

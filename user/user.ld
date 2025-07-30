@@ -3,7 +3,7 @@ OUTPUT_ARCH( "riscv" )
 SECTIONS
 {
  . = 0x0;
- 
+
   .text : {
     *(.text .text.*)
   }
