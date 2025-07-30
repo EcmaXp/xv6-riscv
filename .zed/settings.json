@@ -12,5 +12,11 @@
         "**/.settings",
         "**/__pycache__",
         "**/.ruff_cache",
+        // xv6-riscv
+        "*.o",
+        "*.d",
+        "*.asm",
+        "*.sym",
+        "*.img"
     ]
 }
