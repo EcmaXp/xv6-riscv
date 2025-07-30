@@ -18,7 +18,7 @@
 #include "file.h"
 #include "fcntl.h"
 
-atomic_int readcount;
+atomic_uint readcount;
 
 // Fetch the nth word-sized system call argument as a file descriptor
 // and return both the descriptor and the corresponding struct file.
@@ -510,7 +510,7 @@ sys_pipe(void)
   return 0;
 }
 
-int
+uint
 sys_getreadcount(void)
 {
   return readcount;
