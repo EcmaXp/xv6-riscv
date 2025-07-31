@@ -36,13 +36,14 @@
         };
 
         devShells.default = pkgs.mkShell {
-          inputsFrom = [ packages.default ];
+          packages = [ packages.default ];
         };
 
         apps.qemu = {
           type = "app";
           program = toString (
             pkgs.writeShellScript "run-qemu" ''
+              export PATH="${packages.default}/bin:$PATH"
               exec make qemu "$@"
             ''
           );
